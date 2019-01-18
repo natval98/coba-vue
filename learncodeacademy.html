@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- https://www.youtube.com/playlist?list=PLoYCgNOIyGADZuvKJweutZDOO9VI9YiJ9 -->
+<!-- Terakhir yang belum dilihat Vue Tutorial #5 -->
+<html>
+    <head>
+        <title>Learn Code Academy Youtube</title>
+    </head>
+    <body>
+        <h1>My App</h1>
+        <div id="app"></div>
+
+        <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+        <script type="text/javascript">
+            // Vue Tutorial #4
+            Vue.component('friend-component', {
+                props: ['friend'],
+                filters: {
+                    fullName(value){
+                        return `${value.first} ${value.last}`
+                    }
+                },
+                methods: {
+                    incrementAge(friend) {
+                        friend.age = friend.age + 1;
+                    },
+                },
+                template: `
+                <div>
+                    <h4>{{ friend | fullName }}</h4>
+                    <h5> {{ friend.age }}</h5>
+                    <button v-on:click="incrementAge(friend)"> + </button>
+                    <button v-on:click="friend.age = friend.age - 1"> - </button>
+                    <input v-model="friend.first" /> 
+                    <input v-model="friend.last" />
+                </div>
+                `
+            })
+
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    // Vue Tutorial #1 & #2
+                    /*
+                    bobby: {
+                        first: 'Bobby',
+                        last: 'Bone',
+                        age: 17
+                    },
+                    john: {
+                        first: 'John',
+                        last: 'Doe',
+                        age: 35
+                    },
+                    */
+                    friends: [
+                        {
+                            first: 'Bobby',
+                            last: 'Bone',
+                            age: 17
+                        },
+                        {
+                            first: 'John',
+                            last: 'Doe',
+                            age: 35
+                        }
+                    ]
+                },
+                /*
+                // Vue Tutorial #2
+                computed: {
+                    bobbyFullName(){
+                        return `${this.bobby.first} ${this.bobby.last}`
+                    },
+                    johnFullName(){
+                        return `${this.john.first} ${this.john.last}`
+                    }
+                },
+                
+                filters: {
+                    fullName(value){
+                        return `${value.first} ${value.last}`
+                    }
+                },
+
+                // Vue Tutorial #3
+                methods: {
+                    incrementAge(friend) {
+                        friend.age = friend.age + 1;
+                    },
+                },
+                */
+                template: `<div>
+                <!-- Vue Tutorial #1 & #2 -->
+                <!--
+                <h2>Hi {{ john.name }} age {{ john.age }} !</h2>
+                <h2>Hi {{ bobby.name }} age {{ bobby.age }} !</h2>
+                <h4> {{ johnFullName }}</h4>
+                <h4>{{ bobbyFullName }}</h4>
+                <h6>{{ john | fullName }}</h6>
+                <h6>{{ bobby | fullName }}</h6>
+                -->
+
+                <!-- Vue Tutorial #3 -->
+                <!--
+                <h2 v-for="friend in friends">
+                    <h4>{{ friend | fullName }}</h4>
+                    <h5> {{ friend.age }}</h5>
+                    <button v-on:click="incrementAge(friend)"> + </button>
+                    <button v-on:click="friend.age = friend.age - 1"> - </button>
+                    <input v-model="friend.first" /> 
+                    <input v-model="friend.last" />
+                </h2>
+                -->
+                
+                //Vue Tutorial #4
+                <friend-component v-for="item in friends" v-bind:friend="item"></friend-component>
+
+                </div>
+                `
+            })
+        </script>
+    </body>
+</html>
